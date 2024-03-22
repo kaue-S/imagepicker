@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { Button, View, Image, Text } from "react-native";
 import { useState, useEffect } from "react";
 import * as ImagePicker from "expo-image-picker";
+import * as MediaLibrary from "expo-media-library";
 
 export default function App() {
   //State tradicional para armazenarf a referência da foto (quando existir)
@@ -40,6 +41,8 @@ export default function App() {
   //Acesasr câmera:
 
   const acessarCamera = async () => {
+    /* Ao executar esta função quando o usuário escolhe tirar uma foto, utilizamos o launchCameraAsyncpara abrar a câmera do sistema operacional */
+
     const imagem = await ImagePicker.launchCameraAsync({
       allowsEditing: false,
       aspect: [16, 9],
@@ -47,6 +50,8 @@ export default function App() {
     });
 
     if (!imagem.canceled) {
+      //Usando API do MediaLibrary para salvar no armazenamento físico do dispositivo
+      await MediaLibrary.saveToLibraryAsync(imagem.assets[0].uri);
       setFoto(imagem.assets[0].uri);
     }
   };
