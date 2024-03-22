@@ -68,6 +68,7 @@ export default function App() {
       >
         <Button title="Escolher foto" onPress={escolherFoto} />
         <Button title="tirar uma nova foto" onPress={acessarCamera} />
+        <Button title="tirar uma nova foto" onPress={acessarCamera} />
         {foto && (
           <Image source={{ uri: foto }} style={{ width: 300, height: 300 }} />
         )}
