@@ -1,8 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import { Button, View, Image, Text } from "react-native";
+import { Button, View, Image, Share } from "react-native";
 import { useState, useEffect } from "react";
 import * as ImagePicker from "expo-image-picker";
 import * as MediaLibrary from "expo-media-library";
+import * as Sharing from "expo-sharing";
 
 export default function App() {
   //State tradicional para armazenarf a referência da foto (quando existir)
@@ -56,6 +57,17 @@ export default function App() {
     }
   };
 
+  /* ============== */
+
+  //Compartilhar imagem
+
+  const compartilhar = () => {
+    Share.share({
+      message: "Seleciona a imagem",
+      url: foto.uri,
+    });
+  };
+
   return (
     <>
       <StatusBar />
@@ -70,7 +82,10 @@ export default function App() {
         <Button title="tirar uma nova foto" onPress={acessarCamera} />
 
         {foto && (
-          <Image source={{ uri: foto }} style={{ width: 300, height: 300 }} />
+          <View>
+            <Image source={{ uri: foto }} style={{ width: 300, height: 300 }} />
+            <Button title="Compartilhar" onPress={compartilhar} />
+          </View>
         )}
       </View>
     </>
