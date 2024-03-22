@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { Button, View, Image } from "react-native";
+import { Button, View, Image, Text } from "react-native";
 import { useState, useEffect } from "react";
 import * as ImagePicker from "expo-image-picker";
 
@@ -19,7 +19,9 @@ export default function App() {
     verificaPermissoes();
   }, []);
 
+  //Ao pressionar o botão, executa esta função
   const escolherFoto = async () => {
+    //Acessando via ImagePicker a biblioteca para a seleção de apenas imagens, com recursos de edição habilitado, proporção de 16,9 e qualidade total.
     const resultado = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
@@ -38,7 +40,11 @@ export default function App() {
       <StatusBar />
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Button title="Escolher foto" onPress={escolherFoto} />
-        <Image style={{ width: 300, height: 300 }} />
+        {foto ? (
+          <Image source={{ uri: foto }} style={{ width: 300, height: 300 }} />
+        ) : (
+          <Text>Sem foto!</Text>
+        )}
       </View>
     </>
   );
