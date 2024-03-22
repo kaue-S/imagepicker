@@ -30,20 +30,41 @@ export default function App() {
     });
 
     if (!resultado.canceled) {
-      setFoto(resultado.assets[0].url);
+      setFoto(resultado.assets[0].uri);
     }
   };
   console.log(foto);
 
+  // ===========//
+
+  //Acesasr câmera:
+
+  const acessarCamera = async () => {
+    const imagem = await ImagePicker.launchCameraAsync({
+      allowsEditing: false,
+      aspect: [16, 9],
+      quality: 1,
+    });
+
+    if (!imagem.canceled) {
+      setFoto(imagem.assets[0].uri);
+    }
+  };
+
   return (
     <>
       <StatusBar />
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "space-evenly",
+        }}
+      >
         <Button title="Escolher foto" onPress={escolherFoto} />
-        {foto ? (
+        <Button title="tirar uma nova foto" onPress={acessarCamera} />
+        {foto && (
           <Image source={{ uri: foto }} style={{ width: 300, height: 300 }} />
-        ) : (
-          <Text>Sem foto!</Text>
         )}
       </View>
     </>
