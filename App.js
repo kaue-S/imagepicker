@@ -42,7 +42,7 @@ export default function App() {
   //Acesasr câmera:
 
   const acessarCamera = async () => {
-    /* Ao executar esta função quando o usuário escolhe tirar uma foto, utilizamos o launchCameraAsyncpara abrar a câmera do sistema operacional */
+    /* Ao executar esta função quando o usuário escolhe tirar uma foto, utilizamos o launchCameraAsync para abrir a câmera do sistema operacional */
 
     const imagem = await ImagePicker.launchCameraAsync({
       allowsEditing: false,
